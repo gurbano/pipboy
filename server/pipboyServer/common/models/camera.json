@@ -1,0 +1,39 @@
+{
+  "name": "Camera",
+  "plural": "Cameras",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "desc": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "metadata": {
+      "type": "object"
+    },
+    "enabled": {
+      "type": "boolean",
+      "required": true
+    },
+    "started": {
+      "type": "boolean",
+      "required": true
+    },
+    "mode": {
+      "type": "string"
+    },
+    "output": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

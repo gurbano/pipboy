@@ -1,0 +1,30 @@
+{
+  "name": "Snapshot",
+  "plural": "Snaps",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "position": {
+      "type": "geopoint"
+    },
+    "file": {
+      "type": "string",
+      "required": true
+    },
+    "data": {
+      "type": "string",
+      "required": false
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

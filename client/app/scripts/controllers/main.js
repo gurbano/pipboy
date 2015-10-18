@@ -9,7 +9,11 @@
  */
 angular.module('pipboyClientApp')
   .controller('MainCtrl', function () {
-  	
+  	this.awesomeThings = [
+      'HTML5 Boilerplate',
+      'AngularJS',
+      'Karma'
+    ];
   	
 
   	
