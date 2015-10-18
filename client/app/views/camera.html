@@ -1,5 +1,36 @@
-<div>
+<div class="container">
 	<div ng-repeat="alert in alerts">
 		<div class="alert alert-{{alert.type}}" role="alert">{{alert.message}}</div>
 	</div>   	
+
+
+	<div ng-repeat="camera in cameras">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<strong>{{camera.name}} - ({{camera.desc}})</strong>
+			</div>
+			<div class="panel-body">
+				<div>
+					<p><strong>Mode </strong> {{camera.mode}} ({{camera.enabled ? 'ON': 'OFF'}})</p>
+					<p><strong>Output </strong> {{camera.output}}</p>
+					<p><strong>Resolution </strong> {{camera.metadata.opts.width}} x {{camera.metadata.opts.height}}</p>
+				</div>
+	    		<div class="btn-group" role="group">
+				  <button type="button" class="btn btn-default" ng-click="start('{{camera.name}}')">Start</button>
+				  <button type="button" class="btn btn-default" ng-click="stop('{{camera.name}}')">Stop</button>	  
+				</div>	
+	  		</div>
+	  			
+		</div>
+	</div>   	
+
+	  <div class="btn-group" role="group" aria-label="...">
+		  <button type="button" class="btn btn-default" ng-click="scan()">Scan</button>
+		  <button type="button" class="btn btn-default" ng-click="bootstrap()">Bootstrap</button>
+		  
+		</div>
+	
+
+
+
 </div>

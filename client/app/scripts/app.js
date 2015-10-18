@@ -8,6 +8,8 @@
  *
  * Main module of the application.
  */
+
+
 angular
   .module('pipboyClientApp', [
     'ngAnimate',
@@ -19,6 +21,7 @@ angular
     'ngSanitize',
     'ngTouch'
   ])
+  .value('endpoint', '127.0.0.1:3000/API')
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {

@@ -4,12 +4,20 @@ var RaspiCam = require("raspicam");
 
 module.exports = function(Camera) {	
 	Camera.cameras = {};
-	Camera.bootstrap = function (cb) {
-		/*Create camera and save into db*/
+	/*Reload cameras by settings*/
+	Camera.bootstrap = function (cb) {		
+		Camera.deleteAll();
 		for (var i = settings.cameras.length - 1; i >= 0; i--) {
 			var camSetting = settings.cameras[i];			
-			Camera.cameras[camSetting.name] = new RaspiCam(camSetting);
-			console.log(Camera.cameras[camSetting.name]);
+			Camera.cameras[camSetting.name] = new RaspiCam(
+				{
+					output: camSetting.output,
+					width: 800,
+					height: 480,
+					mode: camSetting.mode
+				}
+			);
+			//console.log(Camera.cameras[camSetting.name]);
 			mkdirp(camSetting.output);
 			Camera.create({
 				"desc": camSetting.desc,
@@ -35,15 +43,28 @@ module.exports = function(Camera) {
         	returns: {arg: 'result', type: 'object'}
     	}
     );
+    
 
 	/*photos - take a pic*/
 	Camera.photo = function (cb) {
 		var cam = Camera.cameras['photo'];
-		cam.start(); //take photo
-		cb(null, {cameras:cameras,  status: 'OK' });		
+		if (cam){
+			cam.on("read", function(err, timestamp, filename){ 
+			    cam.on("read");
+				cb(null, {src:filename,  status: 'OK' });		    
+			});
+			if(!cam.start()){
+				cb(null, {msg: 'error while taking photo', status: 'KO' });
+			} 	
+		}else{
+			cb(null, {msg: 'camera not right at all', status: 'KO' });
+		}
+
+		
+		
 	}     
     Camera.remoteMethod(
-        'scan', 
+        'photo', 
         {
         	returns: {arg: 'result', type: 'object'}
     	}
